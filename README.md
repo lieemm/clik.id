@@ -1,6 +1,6 @@
-# Pinterest Clone
+# CLik
 
-A Pinterest-like interface built with React and Material-UI, featuring a modern design and responsive layout.
+Material-UI, featuring a modern design and responsive layout.
 
 ## Features
 
