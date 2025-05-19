@@ -1,4 +1,4 @@
-# CLik
+# Clik
 
 Material-UI, featuring a modern design and responsive layout.
 
