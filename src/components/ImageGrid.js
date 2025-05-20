@@ -8,7 +8,7 @@ const Gallery = styled(Box)(({ theme }) => ({
   flexWrap: 'wrap',
   alignItems: 'center',
   alignContent: 'flex-start',
-  padding: 0,
+  padding: '16px',
   gap: '12px',
   width: '100%',
   minHeight: '912px',
@@ -134,7 +134,7 @@ const mockData = [
   },
 ];
 
-const ImageGrid = ({ category = 'all', searchQuery = '' }) => {
+const ImageGrid = ({ category = 'all', searchQuery = '', onCardClick }) => {
   const [filteredData, setFilteredData] = useState(mockData);
 
   useEffect(() => {
@@ -161,7 +161,10 @@ const ImageGrid = ({ category = 'all', searchQuery = '' }) => {
     <Gallery>
       {filteredData.length > 0 ? (
         filteredData.map((item) => (
-          <ItemCard key={item.id}>
+          <ItemCard key={item.id} 
+            sx={{ cursor: onCardClick ? 'pointer' : 'default' }}
+            onClick={onCardClick ? () => onCardClick(item) : undefined}
+          >
             <ImageContainer>
               <img
                 src={`${item.image}?auto=format&fit=crop&w=800&q=80`}
