@@ -52,6 +52,13 @@ const Moodboard = () => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Style name mapping
+  const styleNames = {
+    style: 'Minimalist',
+    industrial: 'Industrial',
+    midcentury: 'Mid-Century Modern',
+  };
+
   useEffect(() => {
     // Reset bottomsheet to default state when component mounts
     setIsExpanded(false);
@@ -171,48 +178,50 @@ const Moodboard = () => {
           {/* Style Accordion */}
           <Accordion expanded={expanded === 'style'} onChange={() => setExpanded(expanded === 'style' ? false : 'style')} sx={{
             boxShadow: 'none',
-            borderRadius: 2,
-            mb: 2,
+            borderRadius: '8px',
+            mb: 1.5,
             border: '1px solid #E4E4E7',
             '&:before': { display: 'none' },
           }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 56 }}>
-              <Typography sx={{ fontWeight: 600, fontSize: 18, color: '#18181B' }}>Style: Minimalist</Typography>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 40, height: 40 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B' }}>Minimalist</Typography>
+                {expanded === 'style' && (
+                  <svg width="16" height="16" style={{ marginLeft: 4 }}><circle cx="8" cy="8" r="7" stroke="#10B981" strokeWidth="2" fill="none" /><circle cx="8" cy="8" r="3" fill="#10B981" /></svg>
+                )}
+              </Box>
             </AccordionSummary>
             <AccordionDetails>
-              <Box sx={{ mb: 2 }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-                  <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B' }}>Minimalist</Typography>
-                  <svg width="16" height="16" style={{ marginLeft: 4 }}><circle cx="8" cy="8" r="7" stroke="#10B981" strokeWidth="2" fill="none" /><circle cx="8" cy="8" r="3" fill="#10B981" /></svg>
-                </Box>
-                <Typography sx={{ fontSize: 16, color: '#18181B', mb: 2 }}>
+              <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                gap: 2,
+                width: '100%',
+                mb: 2,
+              }}>
+                <Typography sx={{ fontSize: 16, color: '#18181B', mb: 1, fontWeight: 400, lineHeight: '24px' }}>
                   The Japandi moodboard is presented, featuring a serene blend of Japanese minimalism with Scandinavian functionality. The color palette includes Oyster White, Warm Grey, Cool Grey, and Taupe.
                 </Typography>
                 <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B', mb: 1 }}>Color palatte:</Typography>
-                <RadioGroup
-                  value={selectedPalette}
-                  onChange={e => setSelectedPalette(e.target.value)}
-                  sx={{ gap: 1 }}
-                >
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                   {stylePalettes.map(p => (
-                    <FormControlLabel
-                      key={p.key}
-                      value={p.key}
-                      control={<Radio sx={{ p: 0.5, color: '#E4E4E7', '&.Mui-checked': { color: '#18181B' } }} />}
-                      label={
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                          <Typography sx={{ fontSize: 16, color: '#18181B', minWidth: 120 }}>{p.label}</Typography>
-                          <Box sx={{ display: 'flex', gap: 0.5 }}>
-                            {p.colors.map((c, i) => (
-                              <Box key={i} sx={{ width: 24, height: 24, borderRadius: '50%', bgcolor: c, border: '1px solid #E4E4E7', ml: i > 0 ? -0.5 : 0 }} />
-                            ))}
-                          </Box>
-                        </Box>
-                      }
-                      sx={{ m: 0, width: '100%' }}
-                    />
+                    <Box key={p.key} sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%' }}>
+                      <Radio
+                        checked={selectedPalette === p.key}
+                        onChange={() => setSelectedPalette(p.key)}
+                        value={p.key}
+                        sx={{ p: 0, mr: 1, color: '#E4E4E7', '&.Mui-checked': { color: '#18181B' } }}
+                      />
+                      <Typography sx={{ fontSize: 16, color: '#18181B', minWidth: 120, fontWeight: 400 }}>{p.label}</Typography>
+                      <Box sx={{ display: 'flex', gap: 0.5, ml: 'auto' }}>
+                        {p.colors.map((c, i) => (
+                          <Box key={i} sx={{ width: 24, height: 24, borderRadius: '50%', bgcolor: c, border: '1px solid #E4E4E7', ml: i > 0 ? -0.5 : 0 }} />
+                        ))}
+                      </Box>
+                    </Box>
                   ))}
-                </RadioGroup>
+                </Box>
               </Box>
             </AccordionDetails>
           </Accordion>
@@ -220,13 +229,18 @@ const Moodboard = () => {
           {/* Industrial Accordion */}
           <Accordion expanded={expanded === 'industrial'} onChange={() => setExpanded(expanded === 'industrial' ? false : 'industrial')} sx={{
             boxShadow: 'none',
-            borderRadius: 2,
-            mb: 2,
+            borderRadius: '8px',
+            mb: 1.5,
             border: '1px solid #E4E4E7',
             '&:before': { display: 'none' },
           }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 40 }}>
-              <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B' }}>Industrial</Typography>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 40, height: 40 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B' }}>Industrial</Typography>
+                {expanded === 'industrial' && (
+                  <svg width="16" height="16" style={{ marginLeft: 4 }}><circle cx="8" cy="8" r="7" stroke="#10B981" strokeWidth="2" fill="none" /><circle cx="8" cy="8" r="3" fill="#10B981" /></svg>
+                )}
+              </Box>
             </AccordionSummary>
             <AccordionDetails>
               <Typography sx={{ fontSize: 14, color: '#71717A' }}>No details.</Typography>
@@ -236,13 +250,18 @@ const Moodboard = () => {
           {/* Mid-Century Modern Accordion */}
           <Accordion expanded={expanded === 'midcentury'} onChange={() => setExpanded(expanded === 'midcentury' ? false : 'midcentury')} sx={{
             boxShadow: 'none',
-            borderRadius: 2,
-            mb: 2,
+            borderRadius: '8px',
+            mb: 1.5,
             border: '1px solid #E4E4E7',
             '&:before': { display: 'none' },
           }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 40 }}>
-              <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B' }}>Mid-Century Modern</Typography>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 40, height: 40 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B' }}>Mid-Century Modern</Typography>
+                {expanded === 'midcentury' && (
+                  <svg width="16" height="16" style={{ marginLeft: 4 }}><circle cx="8" cy="8" r="7" stroke="#10B981" strokeWidth="2" fill="none" /><circle cx="8" cy="8" r="3" fill="#10B981" /></svg>
+                )}
+              </Box>
             </AccordionSummary>
             <AccordionDetails>
               <Typography sx={{ fontSize: 14, color: '#71717A' }}>No details.</Typography>
@@ -297,6 +316,200 @@ const Moodboard = () => {
                 </Box>
               </Box>
             ))}
+          </Box>
+        </Box>
+      </Box>
+
+      {/* BottomSheet */}
+      <Box
+        sx={{
+          position: 'fixed',
+          left: 0,
+          right: 0,
+          top: isExpanded ? 60 : 325,
+          bottom: 0,
+          bgcolor: '#fff',
+          borderRadius: '24px 24px 0 0',
+          boxShadow: '0 4px 32px rgba(0,0,0,0.12)',
+          zIndex: 20,
+          display: 'flex',
+          flexDirection: 'column',
+          transition: 'top 0.3s cubic-bezier(.4,0,.2,1)',
+          minHeight: 200,
+          maxHeight: 'calc(100vh - 60px)',
+        }}
+      >
+        {/* Drag bar */}
+        <Box
+          sx={{
+            width: 32,
+            height: 4,
+            borderRadius: 2,
+            bgcolor: '#D3D3D3',
+            mx: 'auto',
+            my: 1,
+            cursor: 'pointer',
+          }}
+          onClick={toggleBottomSheet}
+        />
+        {/* Nội dung cuộn */}
+        <Box sx={{
+          flex: 1,
+          overflowY: 'auto',
+          minHeight: 0,
+          px: 2,
+          pb: 2,
+        }}>
+          {/* Headline */}
+          <Box sx={{ pt: 1, pb: 1 }}>
+            <Typography sx={{ fontWeight: 600, fontSize: 18, color: '#18181B' }}>
+              {`Style: ${styleNames[expanded]}`}
+            </Typography>
+          </Box>
+          {/* Accordions */}
+          <Box sx={{ mt: 1.5 }}>
+            {/* Style Accordion */}
+            <Accordion expanded={expanded === 'style'} onChange={() => setExpanded(expanded === 'style' ? false : 'style')} sx={{
+              boxShadow: 'none',
+              borderRadius: '8px',
+              mb: 1.5,
+              border: '1px solid #E4E4E7',
+              '&:before': { display: 'none' },
+            }}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 40, height: 40 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B' }}>Minimalist</Typography>
+                  {expanded === 'style' && (
+                    <svg width="16" height="16" style={{ marginLeft: 4 }}><circle cx="8" cy="8" r="7" stroke="#10B981" strokeWidth="2" fill="none" /><circle cx="8" cy="8" r="3" fill="#10B981" /></svg>
+                  )}
+                </Box>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Box sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  gap: 2,
+                  width: '100%',
+                  mb: 2,
+                }}>
+                  <Typography sx={{ fontSize: 16, color: '#18181B', mb: 1, fontWeight: 400, lineHeight: '24px' }}>
+                    The Japandi moodboard is presented, featuring a serene blend of Japanese minimalism with Scandinavian functionality. The color palette includes Oyster White, Warm Grey, Cool Grey, and Taupe.
+                  </Typography>
+                  <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B', mb: 1 }}>Color palatte:</Typography>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                    {stylePalettes.map(p => (
+                      <Box key={p.key} sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%' }}>
+                        <Radio
+                          checked={selectedPalette === p.key}
+                          onChange={() => setSelectedPalette(p.key)}
+                          value={p.key}
+                          sx={{ p: 0, mr: 1, color: '#E4E4E7', '&.Mui-checked': { color: '#18181B' } }}
+                        />
+                        <Typography sx={{ fontSize: 16, color: '#18181B', minWidth: 120, fontWeight: 400 }}>{p.label}</Typography>
+                        <Box sx={{ display: 'flex', gap: 0.5, ml: 'auto' }}>
+                          {p.colors.map((c, i) => (
+                            <Box key={i} sx={{ width: 24, height: 24, borderRadius: '50%', bgcolor: c, border: '1px solid #E4E4E7', ml: i > 0 ? -0.5 : 0 }} />
+                          ))}
+                        </Box>
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              </AccordionDetails>
+            </Accordion>
+
+            {/* Industrial Accordion */}
+            <Accordion expanded={expanded === 'industrial'} onChange={() => setExpanded(expanded === 'industrial' ? false : 'industrial')} sx={{
+              boxShadow: 'none',
+              borderRadius: '8px',
+              mb: 1.5,
+              border: '1px solid #E4E4E7',
+              '&:before': { display: 'none' },
+            }}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 40, height: 40 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B' }}>Industrial</Typography>
+                  {expanded === 'industrial' && (
+                    <svg width="16" height="16" style={{ marginLeft: 4 }}><circle cx="8" cy="8" r="7" stroke="#10B981" strokeWidth="2" fill="none" /><circle cx="8" cy="8" r="3" fill="#10B981" /></svg>
+                  )}
+                </Box>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography sx={{ fontSize: 14, color: '#71717A' }}>No details.</Typography>
+              </AccordionDetails>
+            </Accordion>
+
+            {/* Mid-Century Modern Accordion */}
+            <Accordion expanded={expanded === 'midcentury'} onChange={() => setExpanded(expanded === 'midcentury' ? false : 'midcentury')} sx={{
+              boxShadow: 'none',
+              borderRadius: '8px',
+              mb: 1.5,
+              border: '1px solid #E4E4E7',
+              '&:before': { display: 'none' },
+            }}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ minHeight: 40, height: 40 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B' }}>Mid-Century Modern</Typography>
+                  {expanded === 'midcentury' && (
+                    <svg width="16" height="16" style={{ marginLeft: 4 }}><circle cx="8" cy="8" r="7" stroke="#10B981" strokeWidth="2" fill="none" /><circle cx="8" cy="8" r="3" fill="#10B981" /></svg>
+                  )}
+                </Box>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography sx={{ fontSize: 14, color: '#71717A' }}>No details.</Typography>
+              </AccordionDetails>
+            </Accordion>
+          </Box>
+
+          {/* Palette & Materials */}
+          <Box sx={{ pt: 2 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+              <Typography sx={{ fontWeight: 600, fontSize: 18, color: '#18181B' }}>Palette & Materials</Typography>
+              <Button
+                variant="contained"
+                sx={{
+                  bgcolor: '#1E6EB4',
+                  color: '#fff',
+                  borderRadius: 1.5,
+                  px: 2,
+                  py: 0.5,
+                  minWidth: 0,
+                  height: 32,
+                  fontWeight: 500,
+                  fontSize: 14,
+                  textTransform: 'none',
+                  boxShadow: 'none',
+                  gap: 1,
+                }}
+                startIcon={<BookmarkBorderIcon sx={{ color: '#fff', fontSize: 18 }} />}
+              >
+                Save
+              </Button>
+            </Box>
+            {/* Palette row */}
+            <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+              {paletteColors.map((p, i) => (
+                <Box key={i} sx={{ width: 64, height: 64, bgcolor: p.color, borderRadius: 2, border: '1px solid #E4E4E7', boxShadow: '0px 6px 16px rgba(0,0,0,0.12)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center', position: 'relative' }}>
+                  <Typography sx={{ position: 'absolute', bottom: 8, left: 0, right: 0, textAlign: 'center', fontWeight: 500, fontSize: 12, color: p.color === '#000000' ? '#fff' : '#18181B' }}>{p.code}</Typography>
+                </Box>
+              ))}
+            </Box>
+            {/* Materials row */}
+            <Typography sx={{ fontWeight: 500, fontSize: 16, color: '#18181B', mb: 1 }}>Materials</Typography>
+            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+              {materialList.map((m, i) => (
+                <Box key={i} sx={{ width: 83, height: 103, display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative', mr: 1 }}>
+                  <Box sx={{ width: 83, height: 83, borderRadius: 2, bgcolor: '#D9D9D9', overflow: 'hidden', border: '1px solid #E4E4E7', boxShadow: '0px 6px 16px rgba(0,0,0,0.12)' }}>
+                    <img src={m.img} alt={m.label} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </Box>
+                  <Typography sx={{ fontWeight: 500, fontSize: 12, color: '#18181B', mt: 0.5 }}>{m.code}</Typography>
+                  <Box sx={{ position: 'absolute', left: 8, top: 8, bgcolor: 'rgba(255,255,255,0.55)', borderRadius: 8, px: 1, py: 0, display: 'flex', alignItems: 'center', fontSize: 12, color: '#71717A', fontWeight: 500, backdropFilter: 'blur(20px)' }}>
+                    {m.label}
+                  </Box>
+                </Box>
+              ))}
+            </Box>
           </Box>
         </Box>
       </Box>
