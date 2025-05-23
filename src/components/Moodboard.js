@@ -332,7 +332,9 @@ const Moodboard = () => {
             padding: '0 16px 12px 16px',
             maxHeight: isStyleExpanded ? '1000px' : '0',
             overflow: 'hidden',
-            transition: 'max-height 0.3s ease-in-out'
+            transition: 'max-height 0.3s ease-in-out, opacity 0.3s ease-in-out',
+            opacity: isStyleExpanded ? 1 : 0,
+            visibility: isStyleExpanded ? 'visible' : 'hidden',
           }}>
             {/* Style Items */}
             {['style', 'industrial', 'midcentury'].map((style) => (
