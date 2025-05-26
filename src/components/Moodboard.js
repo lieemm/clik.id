@@ -535,11 +535,11 @@ const Moodboard = () => {
               transition: 'max-height 0.3s ease-in-out, opacity 0.3s ease-in-out',
               opacity: isPaletteExpanded ? 1 : 0,
             }}>
-              <Box sx={{ display: 'flex', gap: 1, mb: 1.5 }}>
+              <Box sx={{ display: 'flex', gap: 1, mb: 1.5, flexWrap: 'wrap' }}>
                 {paletteColors.map((p, i) => (
                   <Box key={i} sx={{ 
-                    width: 83,
-                    height: 83,
+                    width: 'calc(25% - 6px)',
+                    aspectRatio: '1/1',
                     bgcolor: p.color,
                     borderRadius: 2,
                     border: '1px solid #E4E4E7',
@@ -580,20 +580,19 @@ const Moodboard = () => {
               <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
                 {materialList.map((m, i) => (
                   <Box key={i} sx={{ 
-                    width: 83,
-                    height: 103,
+                    width: 'calc(25% - 6px)',
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
-                    position: 'relative',
+                    gap: 0.5,
                   }}>
                     <Box sx={{ 
-                      width: 83,
-                      height: 83,
+                      width: '100%',
+                      aspectRatio: '1/1',
                       borderRadius: 2,
                       overflow: 'hidden',
                       border: '1px solid #E4E4E7',
                       boxShadow: '0px 6px 16px rgba(0,0,0,0.12)',
+                      position: 'relative',
                     }}>
                       <img 
                         src={m.img} 
@@ -604,6 +603,26 @@ const Moodboard = () => {
                           objectFit: 'cover',
                         }} 
                       />
+                      <Box sx={{ 
+                        position: 'absolute',
+                        left: 4,
+                        top: 4,
+                        bgcolor: 'rgba(255,255,255,0.55)',
+                        borderRadius: '100px',
+                        px: 1,
+                        py: 0,
+                        backdropFilter: 'blur(20px)',
+                      }}>
+                        <Typography sx={{ 
+                          fontFamily: 'Inter',
+                          fontWeight: 500,
+                          fontSize: 12,
+                          lineHeight: '16px',
+                          color: '#71717A',
+                        }}>
+                          {m.label}
+                        </Typography>
+                      </Box>
                     </Box>
                     <Typography sx={{ 
                       fontFamily: 'Inter',
@@ -611,30 +630,10 @@ const Moodboard = () => {
                       fontSize: 12,
                       lineHeight: '16px',
                       color: '#18181B',
-                      mt: 0.5,
+                      textAlign: 'center',
                     }}>
-                      {m.code}
+                      {m.label}
                     </Typography>
-                    <Box sx={{ 
-                      position: 'absolute',
-                      left: 4,
-                      top: 4,
-                      bgcolor: 'rgba(255,255,255,0.55)',
-                      borderRadius: '100px',
-                      px: 1,
-                      py: 0,
-                      backdropFilter: 'blur(20px)',
-                    }}>
-                      <Typography sx={{ 
-                        fontFamily: 'Inter',
-                        fontWeight: 500,
-                        fontSize: 12,
-                        lineHeight: '16px',
-                        color: '#71717A',
-                      }}>
-                        {m.label}
-                      </Typography>
-                    </Box>
                   </Box>
                 ))}
               </Box>
